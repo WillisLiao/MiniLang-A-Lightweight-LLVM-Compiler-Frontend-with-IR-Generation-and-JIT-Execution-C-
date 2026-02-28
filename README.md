@@ -11,32 +11,34 @@ This project demonstrates a complete compiler frontend pipeline, including:
 - IR optimization passes
 - Just-In-Time (JIT) execution using LLVM ORC
 
-The goal of this project is to gain hands on experience with compiler architecture.
+The goal of this project is to gain hands-on experience with compiler architecture and IR-based optimization.
 
 ---
 
 ## Compiler Pipeline
 
-Source Code
--> Lexer
--> Parser
--> AST
--> LLVM IR
--> Optimization
--> JIT Execution
+Source Code  
+→ Lexer  
+→ Parser  
+→ AST  
+→ LLVM IR  
+→ Optimization  
+→ JIT Execution  
 
 ---
 
-##Supported Features
-- Floating-point numeric literals
-- Binary arithmetic operators: `+ - * /`
-- Parentheses for grouping
-- Function definitions
-- Function calls
+## Supported Features
 
-Example:
-```cpp
-def add(x.y) x + y
+- Floating-point numeric literals  
+- Binary arithmetic operators: `+ - * /`  
+- Parentheses for grouping  
+- Function definitions  
+- Function calls  
+
+Example (MiniLang):
+
+```text
+def add(x, y) x + y
 
 add(3, 4)
 ```
@@ -45,41 +47,43 @@ add(3, 4)
 
 ## Example LLVM IR (Simplified)
 
-```cpp
+```llvm
 define double @add(double %x, double %y) {
-entry: 
-    %addtmp = fadd double %x, %y
-    ret double %addtmp
+entry:
+  %addtmp = fadd double %x, %y
+  ret double %addtmp
 }
 ```
+
 ---
 
 ## Optimization
 
 MiniLang integrates LLVM optimization passes including:
+
 - Instruction Combining (InstCombine)
 - Reassociation
 - Global Value Numbering (GVN)
-- Control flow Graph Simplification
+- Control Flow Graph Simplification
 
 Example of constant folding:
 
 Before optimization:
 
-```cpp
+```llvm
 %1 = fadd double 3.0, 4.0
 ret double %1
 ```
 
 After optimization:
 
-```cpp
+```llvm
 ret double 7.0
 ```
 
 ---
 
-## Build Instructions (macOS + HOmebrew LLVM)
+## Build Instructions (macOS + Homebrew LLVM)
 
 Install dependencies:
 
@@ -110,7 +114,8 @@ Run:
 ---
 
 ## Future Work
-- Emitting object files and assembly targets
-- Targeting alternative architectures (e.g., RISC-V)
-- Adding control flow and loop constructs
-- Exploring tensor-style IR lowering for AI compiler experimentation
+
+- Emitting object files and assembly targets  
+- Targeting alternative architectures (e.g., RISC-V)  
+- Adding control flow and loop constructs  
+- Exploring tensor-style IR lowering for AI compiler experimentation  
